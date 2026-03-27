@@ -49,7 +49,7 @@ This creates a new database `learnquizzy` in your existing cluster. Your old `my
 2. Import your GitHub repo: `Anupkumarpandey1/LearnQuizzy`
 3. Configure:
    - **Framework Preset**: Vite
-   - **Root Directory**: `client`
+   - **Root Directory**: `client` ← IMPORTANT!
    - **Build Command**: `npm run build` (auto-detected)
    - **Output Directory**: `dist` (auto-detected)
 
