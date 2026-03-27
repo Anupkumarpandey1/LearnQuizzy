@@ -7,7 +7,12 @@ export const generateQuiz = async (req, res) => {
   try {
     const { prompt, toughness, numQuestions, numOptions } = req.body;
 
+    console.log('📝 Generating quiz with:', { prompt, toughness, numQuestions, numOptions });
+    console.log('🔑 API Key present:', !!process.env.GEMINI_API_KEY);
+
     const quizData = await generateQuizWithAI(prompt, toughness, numQuestions, numOptions);
+
+    console.log('✅ Quiz data generated successfully');
 
     const quiz = new Quiz({
       quizId: nanoid(8),
@@ -21,14 +26,21 @@ export const generateQuiz = async (req, res) => {
 
     await quiz.save();
 
+    console.log('✅ Quiz saved to database:', quiz.quizId);
+
     res.json({ 
       success: true, 
       quizId: quiz.quizId,
       shareUrl: `${req.protocol}://${req.get('host')}/quiz/${quiz.quizId}`
     });
   } catch (error) {
-    console.error('Quiz generation error:', error);
-    res.status(500).json({ error: 'Failed to generate quiz' });
+    console.error('❌ Quiz generation error:', error.message);
+    console.error('❌ Full error:', error);
+    res.status(500).json({ 
+      error: 'Failed to generate quiz',
+      message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 };
 
