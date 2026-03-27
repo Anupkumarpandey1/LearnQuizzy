@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import Timer from '../components/Timer';
 import QuestionCard from '../components/QuestionCard';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -18,7 +18,7 @@ function QuizPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`/api/quiz/${quizId}`)
+    api.get(`/api/quiz/${quizId}`)
       .then(res => {
         setQuiz(res.data);
         setLoading(false);
@@ -60,7 +60,7 @@ function QuizPage() {
     
     setSubmitting(true);
     try {
-      const res = await axios.post(`/api/quiz/${quizId}/attempt`, {
+      const res = await api.post(`/api/quiz/${quizId}/attempt`, {
         playerName,
         answers,
         timeTaken: timer

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { useSocket } from '../hooks/useSocket';
 import LeaderboardTable from '../components/LeaderboardTable';
 import ShareBox from '../components/ShareBox';
@@ -14,15 +14,15 @@ function Leaderboard() {
   const [loading, setLoading] = useState(true);
 
   const fetchLeaderboard = useCallback(() => {
-    axios.get(`/api/quiz/${quizId}/leaderboard`)
+    api.get(`/api/quiz/${quizId}/leaderboard`)
       .then(res => setLeaderboard(res.data))
       .catch(() => setLeaderboard([]));
   }, [quizId]);
 
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/quiz/${quizId}`),
-      axios.get(`/api/quiz/${quizId}/leaderboard`)
+      api.get(`/api/quiz/${quizId}`),
+      api.get(`/api/quiz/${quizId}/leaderboard`)
     ])
       .then(([quizRes, leaderboardRes]) => {
         setQuiz(quizRes.data);

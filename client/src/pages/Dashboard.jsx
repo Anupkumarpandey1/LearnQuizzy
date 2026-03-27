@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 function Dashboard() {
@@ -9,7 +9,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/public')
+    api.get('/api/public')
       .then(res => {
         setQuizzes(res.data);
         setLoading(false);
