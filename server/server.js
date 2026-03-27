@@ -14,20 +14,16 @@ dotenv.config();
 const app = express();
 const httpServer = createServer(app);
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  process.env.FRONTEND_URL
-].filter(Boolean);
-
+// Allow all origins for now (can restrict later)
 const io = new Server(httpServer, {
   cors: { 
-    origin: allowedOrigins,
+    origin: '*',
     credentials: true 
   }
 });
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: '*',
   credentials: true
 }));
 
