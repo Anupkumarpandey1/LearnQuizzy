@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import QuizForm from '../components/QuizForm';
 
 function Home() {
@@ -11,10 +11,11 @@ function Home() {
     setLoading(true);
 
     try {
-      const res = await axios.post('/api/quiz/generate', formData);
+      const res = await api.post('/api/quiz/generate', formData);
       navigate(`/quiz/${res.data.quizId}`);
     } catch (error) {
-      const errorMsg = error.response?.data?.error || 'Failed to generate quiz. Try again!';
+      console.error('Quiz generation error:', error);
+      const errorMsg = error.response?.data?.error || error.message || 'Failed to generate quiz. Please check if backend is running.';
       alert(errorMsg);
       setLoading(false);
     }
