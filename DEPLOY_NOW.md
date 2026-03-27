@@ -2,17 +2,18 @@
 
 Your code is on GitHub! Now deploy in 3 steps:
 
-## 1️⃣ MongoDB Atlas (2 minutes)
+## 1️⃣ MongoDB Atlas - ALREADY DONE! ✅
 
-1. Go to https://www.mongodb.com/cloud/atlas/register
-2. Create free cluster → Click "Create"
-3. Create database user (username + password)
-4. Click "Network Access" → "Add IP Address" → "Allow Access from Anywhere" (0.0.0.0/0)
-5. Click "Connect" → "Connect your application"
-6. Copy connection string: `mongodb+srv://username:password@cluster.mongodb.net/`
-7. Add database name at end: `mongodb+srv://username:password@cluster.mongodb.net/learnquizzy`
+**Good news!** You already have MongoDB Atlas set up. I've configured it to use your existing cluster with a new database called `learnquizzy`.
 
-**Save this connection string - you'll need it for Render!**
+**Your connection string (already in server/.env):**
+```
+mongodb+srv://concept:Vy5Fcsm7Yg7c1vDi@cluster0.o854obv.mongodb.net/learnquizzy?appName=Cluster0
+```
+
+This creates a new database `learnquizzy` in your existing cluster. Your old `myDB` database is untouched!
+
+**For future projects:** Just change `/learnquizzy` to `/your-new-project-name`. See `HOW_TO_REUSE_MONGODB.md` for details.
 
 ---
 
@@ -30,7 +31,7 @@ Your code is on GitHub! Now deploy in 3 steps:
 
 5. Click "Advanced" → Add Environment Variables:
    ```
-   MONGODB_URI = (paste your Atlas connection string from step 1)
+   MONGODB_URI = mongodb+srv://concept:Vy5Fcsm7Yg7c1vDi@cluster0.o854obv.mongodb.net/learnquizzy?appName=Cluster0
    GEMINI_API_KEY = AIzaSyCwbWxepccxj0MEUqg0m6_mKecZRWNiPa4
    NODE_ENV = production
    PORT = 5000
